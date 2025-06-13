@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  duck-hunt:
+    build: .
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix
+    environment:
+      - DISPLAY=${DISPLAY}
+    # For Linux hosts, allow X11 connections
+    # For Mac/Windows, additional setup may be required
+    # See README for instructions

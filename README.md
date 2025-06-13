@@ -1,8 +1,83 @@
-# Duck Hunt Game\n\nA modern implementation of the classic Duck Hunt game using the Ursina game engine.\n\n## Features\n\n- First-person duck hunting gameplay\n- Score tracking and high score system\n- Time-limited rounds with increasing difficulty\n- Visual feedback for hits and misses\n- Simple 3D environment\n\n## Controls\n\n- Mouse movement: Aim\n- Left mouse button: Shoot\n- ESC key: Pause/Menu\n- R key: Restart game\n\n## Requirements\n\n- Python 3.x\n- Ursina game engine (Requirement already satisfied: ursina in /home/neha/miniconda3/envs/qchallenge/lib/python3.13/site-packages (7.0.0)
-Requirement already satisfied: panda3d in /home/neha/miniconda3/envs/qchallenge/lib/python3.13/site-packages (from ursina) (1.10.15)
-Requirement already satisfied: panda3d-gltf in /home/neha/miniconda3/envs/qchallenge/lib/python3.13/site-packages (from ursina) (1.3.0)
-Requirement already satisfied: pillow in /home/neha/miniconda3/envs/qchallenge/lib/python3.13/site-packages (from ursina) (11.2.1)
-Requirement already satisfied: pyperclip in /home/neha/miniconda3/envs/qchallenge/lib/python3.13/site-packages (from ursina) (1.9.0)
-Requirement already satisfied: screeninfo in /home/neha/miniconda3/envs/qchallenge/lib/python3.13/site-packages (from ursina) (0.8.1)
-Requirement already satisfied: panda3d-simplepbr>=0.6 in /home/neha/miniconda3/envs/qchallenge/lib/python3.13/site-packages (from panda3d-gltf->ursina) (0.13.1)
-Requirement already satisfied: typing_extensions~=4.7 in /home/neha/miniconda3/envs/qchallenge/lib/python3.13/site-packages (from panda3d-simplepbr>=0.6->panda3d-gltf->ursina) (4.14.0))\n
+# Duck Hunt Game
+
+A modern implementation of the classic Duck Hunt game using the Ursina game engine.
+
+## Features
+
+- First-person duck hunting gameplay
+- Score tracking and high score system
+- Time-limited rounds with increasing difficulty
+- Visual feedback for hits and misses
+- Simple 3D environment
+
+## Controls
+
+- Mouse movement: Aim
+- Left mouse button: Shoot
+- ESC key: Pause/Menu
+- R key: Restart game
+
+## Requirements
+
+- Python 3.x
+- Ursina game engine (`pip install ursina`)
+
+## Installation
+
+### Option 1: Direct Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/nsarode/amzQ_duckhunt.git
+   cd amzQ_duckhunt
+   ```
+
+2. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+3. Run the game:
+   ```bash
+   python duck_hunt.py
+   ```
+
+### Option 2: Docker Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/nsarode/amzQ_duckhunt.git
+   cd amzQ_duckhunt
+   ```
+
+2. Build and run with Docker:
+   ```bash
+   docker-compose up --build
+   ```
+
+#### X11 Forwarding for Docker (Linux)
+
+For Linux hosts, you need to allow X11 connections:
+
+```bash
+xhost +local:docker
+docker-compose up
+```
+
+#### X11 Forwarding for Docker (Mac/Windows)
+
+For Mac or Windows, additional setup is required:
+
+- **Mac**: Install XQuartz and run:
+  ```bash
+  xhost +localhost
+  docker-compose up
+  ```
+
+- **Windows**: Install VcXsrv or Xming, then set DISPLAY environment variable.
+
+## Development
+
+- The game is built with the Ursina game engine
+- High scores are saved in `duck_hunt_high_score.json`
+- Modify `duck_hunt.py` to add new features or change game mechanics
