@@ -1,0 +1,56 @@
+# Duck Hunt Game Instructions and Requirements
+
+## Game Overview
+Create a modern version of the classic Duck Hunt game using the Ursina game engine. The player aims and shoots at ducks flying across the screen to score points within a time limit.
+
+## Core Game Requirements
+
+### Game Elements
+1. Background: A scenic outdoor environment with sky, grass, and trees
+2. Player: First-person perspective with a visible gun/crosshair
+3. Ducks: Multiple ducks that fly across the screen in random patterns
+4. Score display: Shows current score, high score, and remaining time
+5. Sound effects: For shooting, duck hits, misses, and background ambience
+
+### Game Mechanics
+1. Shooting: Player clicks to shoot at ducks
+2. Duck Movement: Ducks should move in varied, somewhat unpredictable patterns
+3. Scoring: 
+   - +10 points for each duck hit
+   - -5 points for missed shots
+4. Time Limit: 60 seconds per round
+5. Difficulty progression: Ducks move faster as the game progresses
+
+### Technical Requirements
+1. Use Ursina game engine
+2. Implement proper collision detection for shots
+3. Include a main menu with start and quit options
+4. Add a game over screen showing final score
+5. Save and display high scores
+6. Include sound effects and basic background music
+7. Implement particle effects for successful hits
+
+### Controls
+1. Mouse movement: Aim
+2. Left mouse button: Shoot
+3. ESC key: Pause/Menu
+4. R key: Restart game
+
+### Visual Style
+1. Use simple 3D models for ducks and environment
+2. Include basic animations for duck flight and falling when hit
+3. Add visual feedback for hits and misses
+
+### Optional Features (if time permits)
+1. Different duck types with varying speeds and point values
+2. Power-ups (e.g., time extensions, rapid fire)
+3. Multiple environments/backgrounds
+4. Day/night cycle
+5. Weather effects
+
+## Implementation Notes
+- Focus on core gameplay first before adding optional features
+- Ensure the shooting mechanism feels responsive and accurate
+- Balance difficulty to make the game challenging but not frustrating
+- Use simple placeholder assets initially, can be replaced later
+- Implement a clean, modular code structure for easy expansion
