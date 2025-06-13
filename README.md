@@ -1,0 +1,8 @@
+# Duck Hunt Game\n\nA modern implementation of the classic Duck Hunt game using the Ursina game engine.\n\n## Features\n\n- First-person duck hunting gameplay\n- Score tracking and high score system\n- Time-limited rounds with increasing difficulty\n- Visual feedback for hits and misses\n- Simple 3D environment\n\n## Controls\n\n- Mouse movement: Aim\n- Left mouse button: Shoot\n- ESC key: Pause/Menu\n- R key: Restart game\n\n## Requirements\n\n- Python 3.x\n- Ursina game engine (Requirement already satisfied: ursina in /home/neha/miniconda3/envs/qchallenge/lib/python3.13/site-packages (7.0.0)
+Requirement already satisfied: panda3d in /home/neha/miniconda3/envs/qchallenge/lib/python3.13/site-packages (from ursina) (1.10.15)
+Requirement already satisfied: panda3d-gltf in /home/neha/miniconda3/envs/qchallenge/lib/python3.13/site-packages (from ursina) (1.3.0)
+Requirement already satisfied: pillow in /home/neha/miniconda3/envs/qchallenge/lib/python3.13/site-packages (from ursina) (11.2.1)
+Requirement already satisfied: pyperclip in /home/neha/miniconda3/envs/qchallenge/lib/python3.13/site-packages (from ursina) (1.9.0)
+Requirement already satisfied: screeninfo in /home/neha/miniconda3/envs/qchallenge/lib/python3.13/site-packages (from ursina) (0.8.1)
+Requirement already satisfied: panda3d-simplepbr>=0.6 in /home/neha/miniconda3/envs/qchallenge/lib/python3.13/site-packages (from panda3d-gltf->ursina) (0.13.1)
+Requirement already satisfied: typing_extensions~=4.7 in /home/neha/miniconda3/envs/qchallenge/lib/python3.13/site-packages (from panda3d-simplepbr>=0.6->panda3d-gltf->ursina) (4.14.0))\n
