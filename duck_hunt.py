@@ -8,6 +8,9 @@ app = Ursina()
 window.vsync = False  # Disable vsync for more responsive input
 window.fps_counter.enabled = True  # Show FPS counter to monitor performance
 window.exit_button.visible = True  # Make sure the exit button is visible
+window.borderless = False  # Allow window borders for resizing
+window.fullscreen = False  # Start in windowed mode
+window.size = (800, 600)  # Smaller default window size
 window.vsync = False  # Disable vsync for more responsive input
 window.fps_counter.enabled = True  # Show FPS counter to monitor performance
 
@@ -79,6 +82,12 @@ accuracy_text = Text(text="Accuracy: 0%", position=(0, 0.45), scale=1.5, origin=
 title_text = Text(text="DUCK HUNT", scale=4, origin=(0, 0), y=0.3)
 start_button = Button(text="Start Game", scale=(0.3, 0.1), position=(0, 0), on_click=lambda: start_game())
 quit_button = Button(text="Quit", scale=(0.3, 0.1), position=(0, -0.15), on_click=application.quit)
+
+# Add window size controls to main menu
+window_size_text = Text(text="Window Size Controls:", scale=1.5, origin=(0, 0), y=-0.3)
+window_size_help = Text(text="F9: Increase | F10: Decrease | F11: Toggle Fullscreen", scale=1, origin=(0, 0), y=-0.35)
+window_size_text.enabled = True
+window_size_help.enabled = True
 
 # Game over UI
 game_over_text = Text(text="GAME OVER", scale=4, origin=(0, 0), y=0.3, enabled=False)
@@ -424,6 +433,8 @@ def toggle_main_menu(visible):
     title_text.enabled = visible
     start_button.enabled = visible
     quit_button.enabled = visible
+    window_size_text.enabled = visible
+    window_size_help.enabled = visible
 
 # Toggle game over menu visibility
 def toggle_game_over_menu(visible):
@@ -490,6 +501,27 @@ def input(key):
     # Emergency exit - always available
     if key == 'q':
         application.quit()
+        
+    # Toggle fullscreen
+    if key == 'f11':
+        window.fullscreen = not window.fullscreen
+        print(f"Fullscreen: {window.fullscreen}")
+    
+    # Decrease window size
+    if key == 'f10':
+        if not window.fullscreen:
+            current_size = window.size
+            new_size = (int(current_size[0] * 0.8), int(current_size[1] * 0.8))
+            window.size = new_size
+            print(f"Window size decreased to {new_size}")
+    
+    # Increase window size
+    if key == 'f9':
+        if not window.fullscreen:
+            current_size = window.size
+            new_size = (int(current_size[0] * 1.2), int(current_size[1] * 1.2))
+            window.size = new_size
+            print(f"Window size increased to {new_size}")
     
     # Main game controls
     if key == 'left mouse down' and game_active and not game_paused:
