@@ -69,3 +69,7 @@ coverage.xml
 # Temporary files
 tmp/
 temp/
+
+# Keep audio files
+!audio_files/
+!audio_files/*
