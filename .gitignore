@@ -24,6 +24,7 @@ MANIFEST
 # Game-specific files
 duck_hunt_high_score.json
 *.save
+blog.md
 
 # Virtual Environment
 venv/
