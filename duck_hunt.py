@@ -94,6 +94,7 @@ game_over_text = Text(text="GAME OVER", scale=4, origin=(0, 0), y=0.3, enabled=F
 final_score_text = Text(text="Final Score: 0", scale=2, origin=(0, 0), y=0.1, enabled=False)
 restart_button = Button(text="Play Again", scale=(0.3, 0.1), position=(0, -0.1), on_click=lambda: start_game(), enabled=False, highlight_color=color.azure)
 menu_button = Button(text="Main Menu", scale=(0.3, 0.1), position=(0, -0.25), on_click=lambda: show_main_menu(), enabled=False, highlight_color=color.azure)
+game_over_help = Text(text="Use Arrow Keys to Navigate, Enter to Select", scale=1, origin=(0, 0), y=-0.4, enabled=False)
 
 # Pause menu UI
 pause_text = Text(text="PAUSED", scale=4, origin=(0, 0), y=0.3, enabled=False)
@@ -395,14 +396,30 @@ def start_game():
 
 # Show game over screen
 def show_game_over():
+    global current_state, game_active
+    
+    # Set game state to GAME_OVER
+    current_state = GameState.GAME_OVER
+    game_active = False
+    
+    # Show game over menu
     toggle_game_over_menu(True)
     final_score_text.text = f"Final Score: {score}"
+    
+    # Make sure mouse is visible and unlocked for menu interaction
+    mouse.locked = False
+    mouse.visible = True
     
     # Hide game UI
     score_text.enabled = False
     high_score_text.enabled = False
     time_text.enabled = False
     accuracy_text.enabled = False
+    
+    print("Game over! Use arrow keys to navigate and Enter to select an option.")
+    
+    # Ensure the menu buttons are properly highlighted
+    highlight_selected_button()
 
 # Show main menu
 def show_main_menu():
@@ -470,6 +487,7 @@ def toggle_game_over_menu(visible):
     final_score_text.enabled = visible
     restart_button.enabled = visible
     menu_button.enabled = visible
+    game_over_help.enabled = visible
     
     if visible:
         menu_buttons = [restart_button, menu_button]
