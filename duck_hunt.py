@@ -78,25 +78,27 @@ accuracy_text = Text(text="Accuracy: 0%", position=(0, 0.45), scale=1.5, origin=
 
 # Main menu UI
 title_text = Text(text="DUCK HUNT", scale=4, origin=(0, 0), y=0.3)
-start_button = Button(text="Start Game", scale=(0.3, 0.1), position=(0, 0), on_click=lambda: start_game())
-quit_button = Button(text="Quit", scale=(0.3, 0.1), position=(0, -0.15), on_click=application.quit)
+start_button = Button(text="Start Game", scale=(0.3, 0.1), position=(0, 0), on_click=lambda: start_game(), highlight_color=color.azure)
+quit_button = Button(text="Quit", scale=(0.3, 0.1), position=(0, -0.15), on_click=application.quit, highlight_color=color.azure)
 
 # Add window size controls to main menu
 window_size_text = Text(text="Window Size Controls:", scale=1.5, origin=(0, 0), y=-0.3)
 window_size_help = Text(text="F9: Increase | F10: Decrease | F11: Toggle Fullscreen", scale=1, origin=(0, 0), y=-0.35)
+keyboard_nav_help = Text(text="Use Arrow Keys to Navigate, Enter to Select", scale=1, origin=(0, 0), y=-0.4)
 window_size_text.enabled = True
 window_size_help.enabled = True
+keyboard_nav_help.enabled = True
 
 # Game over UI
 game_over_text = Text(text="GAME OVER", scale=4, origin=(0, 0), y=0.3, enabled=False)
 final_score_text = Text(text="Final Score: 0", scale=2, origin=(0, 0), y=0.1, enabled=False)
-restart_button = Button(text="Play Again", scale=(0.3, 0.1), position=(0, -0.1), on_click=lambda: start_game(), enabled=False)
-menu_button = Button(text="Main Menu", scale=(0.3, 0.1), position=(0, -0.25), on_click=lambda: show_main_menu(), enabled=False)
+restart_button = Button(text="Play Again", scale=(0.3, 0.1), position=(0, -0.1), on_click=lambda: start_game(), enabled=False, highlight_color=color.azure)
+menu_button = Button(text="Main Menu", scale=(0.3, 0.1), position=(0, -0.25), on_click=lambda: show_main_menu(), enabled=False, highlight_color=color.azure)
 
 # Pause menu UI
 pause_text = Text(text="PAUSED", scale=4, origin=(0, 0), y=0.3, enabled=False)
-resume_button = Button(text="Resume", scale=(0.3, 0.1), position=(0, 0), on_click=lambda: resume_game(), enabled=False)
-pause_menu_button = Button(text="Main Menu", scale=(0.3, 0.1), position=(0, -0.15), on_click=lambda: show_main_menu(), enabled=False)
+resume_button = Button(text="Resume", scale=(0.3, 0.1), position=(0, 0), on_click=lambda: resume_game(), enabled=False, highlight_color=color.azure)
+pause_menu_button = Button(text="Main Menu", scale=(0.3, 0.1), position=(0, -0.15), on_click=lambda: show_main_menu(), enabled=False, highlight_color=color.azure)
 
 # Create game environment
 def create_environment():
@@ -430,26 +432,62 @@ def show_main_menu():
     mouse.locked = False
     mouse.visible = True
 
+# Global variables for menu navigation
+selected_button_index = 0
+menu_buttons = []  # Will be populated based on current menu
+
+# Highlight the currently selected button
+def highlight_selected_button():
+    for i, button in enumerate(menu_buttons):
+        if i == selected_button_index:
+            button.color = color.azure  # Highlight color
+            button.text_entity.color = color.black
+        else:
+            button.color = color.gray
+            button.text_entity.color = color.white
+
 # Toggle main menu visibility
 def toggle_main_menu(visible):
+    global menu_buttons, selected_button_index
+    
     title_text.enabled = visible
     start_button.enabled = visible
     quit_button.enabled = visible
     window_size_text.enabled = visible
     window_size_help.enabled = visible
+    keyboard_nav_help.enabled = visible
+    
+    if visible:
+        menu_buttons = [start_button, quit_button]
+        selected_button_index = 0
+        highlight_selected_button()
 
 # Toggle game over menu visibility
 def toggle_game_over_menu(visible):
+    global menu_buttons, selected_button_index
+    
     game_over_text.enabled = visible
     final_score_text.enabled = visible
     restart_button.enabled = visible
     menu_button.enabled = visible
+    
+    if visible:
+        menu_buttons = [restart_button, menu_button]
+        selected_button_index = 0
+        highlight_selected_button()
 
 # Toggle pause menu visibility
 def toggle_pause_menu(visible):
+    global menu_buttons, selected_button_index
+    
     pause_text.enabled = visible
     resume_button.enabled = visible
     pause_menu_button.enabled = visible
+    
+    if visible:
+        menu_buttons = [resume_button, pause_menu_button]
+        selected_button_index = 0
+        highlight_selected_button()
 
 # Pause the game
 def pause_game():
@@ -498,11 +536,28 @@ gun = Entity(
 
 # Handle input
 def input(key):
-    global shots_fired, score
+    global shots_fired, score, selected_button_index
     
     # Emergency exit - always available
     if key == 'q':
         application.quit()
+        
+    # Menu navigation with arrow keys
+    if current_state in [GameState.MAIN_MENU, GameState.PAUSED, GameState.GAME_OVER]:
+        # Navigate up in menu
+        if key == 'up arrow' and len(menu_buttons) > 0:
+            selected_button_index = (selected_button_index - 1) % len(menu_buttons)
+            highlight_selected_button()
+            
+        # Navigate down in menu
+        if key == 'down arrow' and len(menu_buttons) > 0:
+            selected_button_index = (selected_button_index + 1) % len(menu_buttons)
+            highlight_selected_button()
+            
+        # Select current menu option with Enter
+        if key == 'enter' and len(menu_buttons) > 0:
+            menu_buttons[selected_button_index].on_click()
+            return
         
     # Toggle fullscreen
     if key == 'f11':

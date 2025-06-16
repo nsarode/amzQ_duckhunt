@@ -28,6 +28,10 @@ A modern implementation of the classic Duck Hunt game using the Ursina game engi
 - ESC key: Pause/Menu
 - R key: Restart game
 
+### Menu Navigation
+- Arrow keys: Navigate menu options
+- Enter key: Select menu option
+
 ### Alternative Controls
 - Mouse movement: Aim (may experience lag on some systems)
 - Left mouse button: Shoot
