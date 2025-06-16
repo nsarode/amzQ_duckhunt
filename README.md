@@ -6,8 +6,11 @@
 [![Amazon Q](https://img.shields.io/badge/Built%20with-Amazon%20Q-FF9900?logo=amazon)](https://aws.amazon.com/q/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![GitHub issues](https://img.shields.io/github/issues/nsarode/amzQ_duckhunt)](https://github.com/nsarode/amzQ_duckhunt/issues)
+[![AWS Challenge](https://img.shields.io/badge/AWS-Build%20Games%20Challenge-232F3E?logo=amazon-aws)](https://community.aws/content/2y6egGcPAGQs8EwtQUM9KAONojz/build-games-challenge-build-classics-with-amazon-q-developer-cli)
 
 A modern implementation of the classic Duck Hunt game using the Ursina game engine.
+
+> This project was created as part of [Amazon's Build Games with Agentic Coding in CLI Challenge](https://community.aws/content/2y6egGcPAGQs8EwtQUM9KAONojz/build-games-challenge-build-classics-with-amazon-q-developer-cli), showcasing the capabilities of Amazon Q Developer CLI for game development.
 
 ## Features
 
