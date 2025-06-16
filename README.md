@@ -22,11 +22,17 @@ A modern implementation of the classic Duck Hunt game using the Ursina game engi
 
 ## Controls
 
-- Mouse movement: Aim
-- Arrow keys: Alternative aiming controls
-- Left mouse button: Shoot
+### Recommended Control Scheme (Less Lag)
+- Arrow keys: Aim (smoother and more responsive than mouse)
+- Space bar: Shoot
 - ESC key: Pause/Menu
 - R key: Restart game
+
+### Alternative Controls
+- Mouse movement: Aim (may experience lag on some systems)
+- Left mouse button: Shoot
+
+### Window Controls
 - F9/F10: Increase/Decrease window size
 - F11: Toggle fullscreen
 - Ctrl+Q or Shift+Q: Emergency exit

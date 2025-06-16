@@ -525,8 +525,11 @@ def input(key):
             window.size = new_size
             print(f"Window size increased to {new_size}")
     
-    # Main game controls
-    if key == 'left mouse down' and game_active and not game_paused:
+    # Shoot function - extracted to be reused by both mouse and keyboard
+    def shoot():
+        if not game_active or game_paused:
+            return
+            
         # Play shoot sound
         if shoot_sound:
             shoot_sound.play()
@@ -536,6 +539,7 @@ def input(key):
         gun.animate_position((0.5, -0.5, 0), duration=0.1, delay=0.05, curve=curve.out_bounce)
         
         # Shoot ray from center of screen
+        global shots_fired
         shots_fired += 1
         hit_info = raycast(camera.world_position, camera.forward, distance=100)
         
@@ -544,11 +548,10 @@ def input(key):
         for duck in ducks[:]:  # Use a copy of the list since we might modify it
             # Check if ray hit a duck
             if hit_info.entity == duck:
-                # print(f"Duck hit! Adding 10 points. Current score: {score} -> {score + 10}")  # Commented out to reduce console spam
                 duck.hit()
                 hit = True
                 break
-        
+                
         # If no hit, play miss sound and effect
         if not hit:
             if miss_sound:
@@ -562,11 +565,20 @@ def input(key):
                 create_miss_effect(camera.world_position + camera.forward * 20)
                 
             # Deduct points for miss
+            global score
             score -= 5
             if score < 0:
                 score = 0
             update_score_display()
     
+    # Mouse shooting
+    if key == 'left mouse down' and game_active and not game_paused:
+        shoot()
+        
+    # Keyboard shooting (space bar)
+    if key == 'space' and game_active and not game_paused:
+        shoot()
+        
     # Pause/unpause game
     if key == 'escape' and game_active:
         if game_paused:
