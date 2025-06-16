@@ -113,7 +113,13 @@ For Mac or Windows, additional setup is required:
 - New ducks spawn automatically when others are shot
 - Game ends when the timer reaches zero
 - High scores are saved between sessions- **Windows**: Install VcXsrv or Xming, then set DISPLAY environment variable.
+## Audio
 
+The game includes sound effects:
+- Gunshot sound when shooting
+- Duck falling sound when a duck is hit
+
+Sound files are located in the `audio_files` directory.
 ## Development
 
 - The game is built with the Ursina game engine

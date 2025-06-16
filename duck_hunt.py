@@ -55,20 +55,20 @@ class GameState(Enum):
 
 current_state = GameState.MAIN_MENU
 
-# Sound effects (placeholders - would need actual sound files)
+# Sound effects
 shoot_sound = None
 hit_sound = None
 miss_sound = None
 quack_sound = None
 
 try:
-    # Load sounds if available
-    shoot_sound = Audio('shoot.wav', loop=False, autoplay=False)
-    hit_sound = Audio('hit.wav', loop=False, autoplay=False)
-    miss_sound = Audio('miss.wav', loop=False, autoplay=False)
-    quack_sound = Audio('quack.wav', loop=False, autoplay=False)
-except:
-    print("Sound files not found. Continuing without sound.")
+    # Load sounds from audio_files directory
+    shoot_sound = Audio('audio_files/gunshot-soundboards.mp3', loop=False, autoplay=False)
+    hit_sound = Audio('audio_files/duck-falling-soundboards.mp3', loop=False, autoplay=False)
+    print("Successfully loaded audio files!")
+except Exception as e:
+    print(f"Error loading audio files: {e}")
+    print("Continuing without sound.")
 
 # Create UI elements
 score_text = Text(text="Score: 0", position=(-0.85, 0.45), scale=2, origin=(0, 0))
