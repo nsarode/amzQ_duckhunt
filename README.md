@@ -93,7 +93,7 @@ For Mac or Windows, additional setup is required:
 
 - The game is built with the Ursina game engine
 - High scores are saved in `duck_hunt_high_score.json`
-- Modify `duck_hunt.py` to add new features or change game mechanics
+- Modify `duckhunt_instructions.txt` to guide AmazonQ to implement new features or change game mechanics. Alternative, modify `duck_hunt.py` to do it all yourself
 
 ## Future Improvements
 
