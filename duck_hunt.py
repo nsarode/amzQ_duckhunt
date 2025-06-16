@@ -498,7 +498,7 @@ gun = Entity(
 
 # Handle input
 def input(key):
-    global shots_fired
+    global shots_fired, score
     
     # Emergency exit - always available
     if key == 'q':
@@ -562,7 +562,6 @@ def input(key):
                 create_miss_effect(camera.world_position + camera.forward * 20)
                 
             # Deduct points for miss
-            nonlocal score
             score -= 5
             if score < 0:
                 score = 0
