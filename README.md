@@ -98,7 +98,21 @@ For Mac or Windows, additional setup is required:
   docker-compose up
   ```
 
-- **Windows**: Install VcXsrv or Xming, then set DISPLAY environment variable.
+## Gameplay
+
+### Scoring System
+- **Hit a Duck**: +10 points
+- **Miss a Shot**: -5 points (minimum score is 0)
+- **Accuracy Bonus**: Your accuracy percentage is displayed and saved with high scores
+- **Time Limit**: 60 seconds per round
+- **Difficulty**: Duck speed increases as time progresses
+
+### Game Mechanics
+- Ducks move in random patterns across the screen
+- Maximum of 5 ducks on screen at any time
+- New ducks spawn automatically when others are shot
+- Game ends when the timer reaches zero
+- High scores are saved between sessions- **Windows**: Install VcXsrv or Xming, then set DISPLAY environment variable.
 
 ## Development
 
