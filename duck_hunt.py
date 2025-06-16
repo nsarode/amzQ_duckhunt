@@ -5,6 +5,11 @@ import os
 
 # Initialize the game
 app = Ursina()
+window.vsync = False  # Disable vsync for more responsive input
+window.fps_counter.enabled = True  # Show FPS counter to monitor performance
+window.exit_button.visible = True  # Make sure the exit button is visible
+window.vsync = False  # Disable vsync for more responsive input
+window.fps_counter.enabled = True  # Show FPS counter to monitor performance
 
 # Global variables
 GAME_TIME = 60  # seconds
@@ -370,6 +375,10 @@ def start_game():
     
     # Make sure mouse is locked for camera control
     mouse.locked = True
+    
+    # Reset camera controller target rotation
+    if hasattr(camera_controller, 'target_rotation'):
+        camera_controller.target_rotation = Vec2(0, 0)
 
 # Show game over screen
 def show_game_over():
@@ -408,6 +417,7 @@ def show_main_menu():
     
     # Unlock mouse for menu interaction
     mouse.locked = False
+    mouse.visible = True
 
 # Toggle main menu visibility
 def toggle_main_menu(visible):
@@ -437,6 +447,7 @@ def pause_game():
         current_state = GameState.PAUSED
         toggle_pause_menu(True)
         mouse.locked = False  # Unlock mouse for menu interaction
+        mouse.visible = True  # Make mouse visible in menus
 
 # Resume the game
 def resume_game():
@@ -447,6 +458,7 @@ def resume_game():
         current_state = GameState.PLAYING
         toggle_pause_menu(False)
         mouse.locked = True  # Lock mouse for gameplay
+        mouse.visible = False  # Hide mouse during gameplay
 
 # Create crosshair
 crosshair = Entity(
@@ -474,6 +486,10 @@ gun = Entity(
 # Handle input
 def input(key):
     global shots_fired
+    
+    # Emergency exit - always available
+    if key == 'q':
+        application.quit()
     
     # Main game controls
     if key == 'left mouse down' and game_active and not game_paused:
@@ -530,6 +546,10 @@ def input(key):
 
 # Update function
 def update():
+    # Process emergency exit key
+    if held_keys['q'] and (held_keys['control'] or held_keys['shift']):
+        application.quit()
+        
     # Run game timer
     if current_state == GameState.PLAYING:
         game_timer()
@@ -552,6 +572,11 @@ def setup_game():
     high_score_text.enabled = False
     time_text.enabled = False
     accuracy_text.enabled = False
+    
+    # Set mouse settings for better responsiveness
+    mouse.locked = True
+    mouse.visible = False
+    mouse.sensitivity = Vec2(50, 50)
 
 # Set up the game
 setup_game()
@@ -565,25 +590,38 @@ class CameraController(Entity):
     def __init__(self):
         super().__init__()
         self.speed = 2
-        self.sensitivity = 40
-        self.rotation_y = 0
-        self.mouse_sensitivity = Vec2(40, 40)
+        self.mouse_sensitivity = Vec2(70, 70)  # Increased sensitivity
+        self.target_rotation = Vec2(0, 0)
         
     def update(self):
         if not game_active or game_paused:
             return
             
-        # Handle mouse look
-        self.rotation_y += mouse.velocity[0] * self.mouse_sensitivity[0] * time.dt
+        # Direct camera control without smoothing for more responsive feel
         camera.rotation_x -= mouse.velocity[1] * self.mouse_sensitivity[1] * time.dt
-        camera.rotation_x = clamp(camera.rotation_x, -90, 90)
-        camera.rotation_y = self.rotation_y
+        camera.rotation_y += mouse.velocity[0] * self.mouse_sensitivity[0] * time.dt
         
-        # Update crosshair position to center of screen
-        crosshair.position = Vec2(0, 0)
+        # Clamp vertical rotation
+        camera.rotation_x = clamp(camera.rotation_x, -90, 90)
+
+# Set up the game
+setup_game()
+
+# Enable mouse control for camera
+mouse.locked = True
+camera.fov = 90
 
 # Create and activate the camera controller
 camera_controller = CameraController()
+
+# Add emergency exit key handler
+def emergency_exit():
+    if held_keys['q'] and (held_keys['control'] or held_keys['shift']):
+        print("Emergency exit triggered")
+        application.quit()
+
+# Add the emergency exit handler to the update loop
+app.update_functions.append(emergency_exit)
 
 # Run the game
 app.run()
