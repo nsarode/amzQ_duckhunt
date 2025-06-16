@@ -548,6 +548,7 @@ def input(key):
 def update():
     # Process emergency exit key
     if held_keys['q'] and (held_keys['control'] or held_keys['shift']):
+        print("Emergency exit triggered")
         application.quit()
         
     # Run game timer
@@ -613,15 +614,6 @@ camera.fov = 90
 
 # Create and activate the camera controller
 camera_controller = CameraController()
-
-# Add emergency exit key handler
-def emergency_exit():
-    if held_keys['q'] and (held_keys['control'] or held_keys['shift']):
-        print("Emergency exit triggered")
-        application.quit()
-
-# Add the emergency exit handler to the update loop
-app.update_functions.append(emergency_exit)
 
 # Run the game
 app.run()
