@@ -11,8 +11,6 @@ window.exit_button.visible = True  # Make sure the exit button is visible
 window.borderless = False  # Allow window borders for resizing
 window.fullscreen = False  # Start in windowed mode
 window.size = (800, 600)  # Smaller default window size
-window.vsync = False  # Disable vsync for more responsive input
-window.fps_counter.enabled = True  # Show FPS counter to monitor performance
 
 # Global variables
 GAME_TIME = 60  # seconds
@@ -230,6 +228,7 @@ class Duck(Entity):
         # Increase score
         score += 10
         shots_hit += 1
+        print(f"Duck.hit() called! Score increased to: {score}")
         update_score_display()
         
         # Create hit effect
@@ -306,6 +305,8 @@ def spawn_duck():
 
 # Update score display
 def update_score_display():
+    global score, high_score
+    print(f"Updating score display. Current score: {score}")
     score_text.text = f"Score: {score}"
     high_score_text.text = f"High Score: {high_score}"
     
@@ -359,6 +360,7 @@ def start_game():
     duck_speed_multiplier = 1.0
     
     # Update displays
+    print("Starting game, resetting score to 0")
     update_score_display()
     update_time_display()
     
@@ -542,6 +544,7 @@ def input(key):
         for duck in ducks[:]:  # Use a copy of the list since we might modify it
             # Check if ray hit a duck
             if hit_info.entity == duck:
+                print(f"Duck hit! Adding 10 points. Current score: {score} -> {score + 10}")
                 duck.hit()
                 hit = True
                 break
