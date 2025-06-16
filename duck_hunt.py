@@ -228,7 +228,7 @@ class Duck(Entity):
         # Increase score
         score += 10
         shots_hit += 1
-        print(f"Duck.hit() called! Score increased to: {score}")
+        # print(f"Duck.hit() called! Score increased to: {score}")  # Commented out to reduce console spam
         update_score_display()
         
         # Create hit effect
@@ -306,7 +306,7 @@ def spawn_duck():
 # Update score display
 def update_score_display():
     global score, high_score
-    print(f"Updating score display. Current score: {score}")
+    # print(f"Updating score display. Current score: {score}")  # Commented out to reduce console spam
     score_text.text = f"Score: {score}"
     high_score_text.text = f"High Score: {high_score}"
     
@@ -544,7 +544,7 @@ def input(key):
         for duck in ducks[:]:  # Use a copy of the list since we might modify it
             # Check if ray hit a duck
             if hit_info.entity == duck:
-                print(f"Duck hit! Adding 10 points. Current score: {score} -> {score + 10}")
+                # print(f"Duck hit! Adding 10 points. Current score: {score} -> {score + 10}")  # Commented out to reduce console spam
                 duck.hit()
                 hit = True
                 break
@@ -602,27 +602,26 @@ def update():
         
     # Arrow key controls for crosshair movement
     if game_active and not game_paused:
-        crosshair_speed = 0.01  # Adjust speed as needed
+        crosshair_speed = 1.0  # Increased speed for better responsiveness
         
         # Up arrow - move crosshair up (camera down)
-        if held_keys['arrow up']:
-            camera.rotation_x -= crosshair_speed * 40
+        if held_keys['up arrow']:
+            camera.rotation_x -= crosshair_speed
             
         # Down arrow - move crosshair down (camera up)
-        if held_keys['arrow down']:
-            camera.rotation_x += crosshair_speed * 40
+        if held_keys['down arrow']:
+            camera.rotation_x += crosshair_speed
             
         # Left arrow - move crosshair left (camera right)
-        if held_keys['arrow left']:
-            camera.rotation_y -= crosshair_speed * 40
+        if held_keys['left arrow']:
+            camera.rotation_y -= crosshair_speed
             
         # Right arrow - move crosshair right (camera left)
-        if held_keys['arrow right']:
-            camera.rotation_y += crosshair_speed * 40
+        if held_keys['right arrow']:
+            camera.rotation_y += crosshair_speed
             
         # Clamp vertical rotation
         camera.rotation_x = clamp(camera.rotation_x, -90, 90)
-        update_score_display()
 
 # Set up the game
 def setup_game():
