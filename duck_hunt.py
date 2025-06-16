@@ -604,9 +604,6 @@ def update():
     if game_active and not game_paused:
         crosshair_speed = 0.01  # Adjust speed as needed
         
-        # Store original position to check if we need to update
-        original_position = camera.rotation.copy()
-        
         # Up arrow - move crosshair up (camera down)
         if held_keys['arrow up']:
             camera.rotation_x -= crosshair_speed * 40
