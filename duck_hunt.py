@@ -599,6 +599,33 @@ def update():
         global score
         score += 1
         update_score_display()
+        
+    # Arrow key controls for crosshair movement
+    if game_active and not game_paused:
+        crosshair_speed = 0.01  # Adjust speed as needed
+        
+        # Store original position to check if we need to update
+        original_position = camera.rotation.copy()
+        
+        # Up arrow - move crosshair up (camera down)
+        if held_keys['arrow up']:
+            camera.rotation_x -= crosshair_speed * 40
+            
+        # Down arrow - move crosshair down (camera up)
+        if held_keys['arrow down']:
+            camera.rotation_x += crosshair_speed * 40
+            
+        # Left arrow - move crosshair left (camera right)
+        if held_keys['arrow left']:
+            camera.rotation_y -= crosshair_speed * 40
+            
+        # Right arrow - move crosshair right (camera left)
+        if held_keys['arrow right']:
+            camera.rotation_y += crosshair_speed * 40
+            
+        # Clamp vertical rotation
+        camera.rotation_x = clamp(camera.rotation_x, -90, 90)
+        update_score_display()
 
 # Set up the game
 def setup_game():
