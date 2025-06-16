@@ -562,8 +562,9 @@ def input(key):
                 create_miss_effect(camera.world_position + camera.forward * 20)
                 
             # Deduct points for miss
+            score_penalty = 5
             global score
-            score -= 5
+            score -= score_penalty
             if score < 0:
                 score = 0
             update_score_display()
