@@ -1,5 +1,12 @@
 # Duck Hunt Game
 
+[![Python](https://img.shields.io/badge/Python-3.9%2B-blue?logo=python)](https://www.python.org/)
+[![Ursina Engine](https://img.shields.io/badge/Ursina-Engine-orange)](https://www.ursinaengine.org/)
+[![Docker](https://img.shields.io/badge/Docker-Ready-2496ED?logo=docker)](https://www.docker.com/)
+[![Amazon Q](https://img.shields.io/badge/Built%20with-Amazon%20Q-FF9900?logo=amazon)](https://aws.amazon.com/q/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![GitHub issues](https://img.shields.io/github/issues/nsarode/amzQ_duckhunt)](https://github.com/nsarode/amzQ_duckhunt/issues)
+
 A modern implementation of the classic Duck Hunt game using the Ursina game engine.
 
 ## Features
