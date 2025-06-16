@@ -16,6 +16,9 @@ A modern implementation of the classic Duck Hunt game using the Ursina game engi
 - Left mouse button: Shoot
 - ESC key: Pause/Menu
 - R key: Restart game
+- F9/F10: Increase/Decrease window size
+- F11: Toggle fullscreen
+- Ctrl+Q or Shift+Q: Emergency exit
 
 ## Requirements
 
@@ -81,3 +84,28 @@ For Mac or Windows, additional setup is required:
 - The game is built with the Ursina game engine
 - High scores are saved in `duck_hunt_high_score.json`
 - Modify `duck_hunt.py` to add new features or change game mechanics
+
+## Future Improvements
+
+For Python developers looking to enhance this project, consider the following improvements:
+
+- **Game Engine Alternatives**: Evaluate other Python game engines like PyGame, Panda3D, or Arcade for better performance or specific features
+- **Sound Implementation**: Add sound effects by:
+  - Creating/acquiring WAV files for shoot, hit, miss, and quack sounds
+  - Placing them in the root directory (referenced in the code)
+  - Implementing volume control and audio mixing
+- **Asset Pipeline**: Create a proper asset loading system with fallbacks for missing resources
+- **Performance Optimization**: Profile the game loop and optimize rendering for smoother mouse response
+- **Duck AI**: Implement more sophisticated movement patterns using path finding or behavior trees
+- **Level System**: Add progressive difficulty levels with different environments and duck behaviors
+- **Multiplayer Support**: Implement local or network multiplayer using Python's networking libraries
+- **Custom Shader Support**: Implement custom shaders for water effects, dynamic lighting, etc.
+- **Unit Testing**: Add pytest-based unit tests for game logic components
+- **Save/Load System**: Implement a more robust save system using SQLite or pickle
+- **Controller Support**: Add gamepad/controller support using the pygame.joystick module
+- **Code Refactoring**: Reorganize into a proper package structure with separate modules for:
+  - Entity classes
+  - UI components
+  - Game states
+  - Asset management
+- **Documentation**: Generate API documentation using Sphinx or pdoc
