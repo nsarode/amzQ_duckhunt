@@ -594,6 +594,12 @@ def update():
     if game_active and not game_paused and len(ducks) < 5:
         if random.random() < 0.02:  # Small chance each frame
             spawn_duck()
+            
+    # Debug key to add score (for testing)
+    if held_keys['t'] and held_keys['control']:
+        global score
+        score += 1
+        update_score_display()
 
 # Set up the game
 def setup_game():
